@@ -456,7 +456,8 @@ const renderDirectory = async (current, acceptsJSON, handlers, methods, config, 
 	const spec = {
 		files,
 		directory,
-		paths: subPaths
+		paths: subPaths,
+		prefix: config.prefix || ''
 	};
 
 	const output = acceptsJSON ? JSON.stringify(spec) : directoryTemplate(spec);
@@ -546,6 +547,10 @@ const getHandlers = methods => Object.assign({
 }, methods);
 
 module.exports = async (request, response, config = {}, methods = {}) => {
+	if (config.prefix) {
+		request.url = request.url.replace(`${config.prefix}/`, '/');
+	}
+
 	const cwd = process.cwd();
 	const current = config.public ? path.resolve(cwd, config.public) : cwd;
 	const handlers = getHandlers(methods);

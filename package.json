@@ -49,8 +49,6 @@
   },
   "nyc": {
     "exclude": [
-      "src/directory.js",
-      "src/error.js",
       "test/*"
     ]
   },
@@ -59,9 +57,6 @@
     "directory.js",
     "coverage"
   ],
-  "git": {
-    "pre-commit": "lint-staged"
-  },
   "dependencies": {
     "bytes": "3.0.0",
     "content-disposition": "0.5.2",
